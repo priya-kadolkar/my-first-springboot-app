@@ -1,5 +1,6 @@
 package com.dlithe.bankingapp.serviceimplementation;
 
+import com.dlithe.bankingapp.dto.CustomerDetailsRequest;
 import com.dlithe.bankingapp.service.TestService;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +33,10 @@ public class TestServiceImplementation implements TestService {
         else {
             return "No values to return";
         }
+    }
+
+    @Override
+    public String registerCustomer(CustomerDetailsRequest customerDetailsRequest) {
+        return null;
     }
 }
