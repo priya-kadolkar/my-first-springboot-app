@@ -58,8 +58,11 @@ public class TestServiceImplementation implements TestService {
 
     @Override
     public CustomerDetailsResponse fetchCustomerDetails(int customerId) {
-        Optional<Customer> customerDetails=customerDAO.findById(customerId);
-        Customer customerFromDatabase=customerDetails.get();
+        Optional<Customer> customer=customerDAO.findById(customerId);
+        if(!customer.isPresent()){
+            throw new NullPointerException("The requested customer is not found!!");
+        }
+        Customer customerFromDatabase=customer.get();
 
         CustomerDetailsResponse customerDetailsResponse=new CustomerDetailsResponse();
         customerDetailsResponse.setId(customerFromDatabase.getId());
