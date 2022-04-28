@@ -62,6 +62,7 @@ public class TestServiceImplementation implements TestService {
         Customer customerFromDatabase=customerDetails.get();
 
         CustomerDetailsResponse customerDetailsResponse=new CustomerDetailsResponse();
+        customerDetailsResponse.setId(customerFromDatabase.getId());
         customerDetailsResponse.setName(customerFromDatabase.getName());
         customerDetailsResponse.setAge(customerFromDatabase.getAge());
 

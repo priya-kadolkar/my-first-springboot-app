@@ -31,6 +31,7 @@ public class TestController {
         return testService.registerCustomer(customerDetailsRequest);
     }
 
+    //Getting customer details based on their customer id
     @GetMapping("get-customer-details/{customerId}")
     public CustomerDetailsResponse fetchDetails(@PathVariable int customerId){
         return testService.fetchCustomerDetails(customerId);
