@@ -37,6 +37,7 @@ public class TestServiceImplementation implements TestService {
 
     @Override
     public String registerCustomer(CustomerDetailsRequest customerDetailsRequest) {
+        System.out.println(customerDetailsRequest);
         return null;
     }
 }
