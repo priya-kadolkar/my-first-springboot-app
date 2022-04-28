@@ -1,14 +1,35 @@
 package com.dlithe.bankingapp.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.dlithe.bankingapp.dto.CustomerDetailsRequest;
+import com.dlithe.bankingapp.service.TestService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class TestController {
 
-    @GetMapping("test")
-    public String testingController(){
+    @Autowired
+    private TestService testService;
 
-        return "Learning spring-boot!!";
+    @GetMapping("fetch-bank-details/{bankName}")
+    public String displayBankDetails(@PathVariable String bankName) {
+        return testService.fetchBankDetails(bankName);
+
     }
+
+
+    @GetMapping("login/{username}/{password}")
+    public String loginDetails(@PathVariable String username, @PathVariable String password) {
+//        return "Username is: "+username+" "+"Password is: "+password;
+        return testService.loginDetails(username, password);
+
+    }
+
+    @PostMapping("register-customer")
+    public String registerNewCustomer(@RequestBody CustomerDetailsRequest customerDetailsRequest){
+        return testService.registerCustomer(customerDetailsRequest);
+    }
+
 }
+
+
