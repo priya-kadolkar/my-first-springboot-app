@@ -1,11 +1,21 @@
 package com.dlithe.bankingapp.serviceimplementation;
 
 import com.dlithe.bankingapp.dto.CustomerDetailsRequest;
+import com.dlithe.bankingapp.dto.CustomerDetailsResponse;
+import com.dlithe.bankingapp.entity.Customer;
+import com.dlithe.bankingapp.repository.CustomerDAO;
 import com.dlithe.bankingapp.service.TestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class TestServiceImplementation implements TestService {
+
+    @Autowired
+    private CustomerDAO customerDAO;
+
     @Override
     public String fetchBankDetails(String bankName) {
         if(bankName!=null){
@@ -37,7 +47,28 @@ public class TestServiceImplementation implements TestService {
 
     @Override
     public String registerCustomer(CustomerDetailsRequest customerDetailsRequest) {
-        System.out.println(customerDetailsRequest);
-        return null;
+
+        Customer customer=new Customer();
+        customer.setName(customerDetailsRequest.getName());
+        customer.setAge(customerDetailsRequest.getAge());
+
+        customerDAO.save(customer);
+        return "User data saved successfully..";
+    }
+
+    @Override
+    public CustomerDetailsResponse fetchCustomerDetails(int customerId) {
+        Optional<Customer> customer=customerDAO.findById(customerId);
+        if(!customer.isPresent()){
+            throw new NullPointerException("The requested customer is not found!!");
+        }
+        Customer customerFromDatabase=customer.get();
+
+        CustomerDetailsResponse customerDetailsResponse=new CustomerDetailsResponse();
+        customerDetailsResponse.setId(customerFromDatabase.getId());
+        customerDetailsResponse.setName(customerFromDatabase.getName());
+        customerDetailsResponse.setAge(customerFromDatabase.getAge());
+
+        return customerDetailsResponse;
     }
 }

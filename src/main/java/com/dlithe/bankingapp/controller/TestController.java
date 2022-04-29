@@ -1,6 +1,7 @@
 package com.dlithe.bankingapp.controller;
 
 import com.dlithe.bankingapp.dto.CustomerDetailsRequest;
+import com.dlithe.bankingapp.dto.CustomerDetailsResponse;
 import com.dlithe.bankingapp.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,12 @@ public class TestController {
     @PostMapping("register-customer")
     public String registerNewCustomer(@RequestBody CustomerDetailsRequest customerDetailsRequest){
         return testService.registerCustomer(customerDetailsRequest);
+    }
+
+    //Getting customer details based on their customer id
+    @GetMapping("get-customer-details/{customerId}")
+    public CustomerDetailsResponse fetchDetails(@PathVariable int customerId){
+        return testService.fetchCustomerDetails(customerId);
     }
 
 }
