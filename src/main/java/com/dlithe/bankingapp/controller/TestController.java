@@ -6,6 +6,8 @@ import com.dlithe.bankingapp.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class TestController {
 
@@ -37,6 +39,17 @@ public class TestController {
         return testService.fetchCustomerDetails(customerId);
     }
 
+    //Getting customer details with one feedback
+    @GetMapping("get-customer-details-with-feedback/{customerId}")
+    public CustomerDetailsResponse fetchDetailsWithOneFeedback(@PathVariable int customerId){
+        return testService.fetchCustomerDetailsWithFeedback(customerId);
+    }
+
+    //To get all the customer details with list of feedbacks
+    @GetMapping("get-customers-details/{customerId}")
+    public CustomerDetailsResponse getDetailsWithAllFeedbacks(@PathVariable int customerId){
+        return testService.getCustomerDetailsWithAllFeedback(customerId);
+    }
 }
 
 
