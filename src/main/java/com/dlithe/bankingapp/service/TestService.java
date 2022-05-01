@@ -24,4 +24,8 @@ public interface TestService {
 
     //customer details with list of feedbacks
     CustomerDetailsResponse getCustomerDetailsWithAllFeedback(int customerId);
+
+    CustomerDetailsResponse fetchCustomerDetailsByName(String customerName);
+
+    CustomerDetailsResponse fetchCustomerDetailsByIdAndName(int customerId, String customerName);
 }

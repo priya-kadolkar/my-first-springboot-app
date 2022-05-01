@@ -135,4 +135,30 @@ public class TestServiceImplementation implements TestService {
 
 
     }
+
+    @Override
+    public CustomerDetailsResponse fetchCustomerDetailsByName(String customerName) {
+        Customer customer=customerDAO.findByName(customerName);
+
+        CustomerDetailsResponse customerDetailsResponse=new CustomerDetailsResponse();
+        customerDetailsResponse.setName(customer.getName());
+        customerDetailsResponse.setId(customer.getId());
+        customerDetailsResponse.setAge(customer.getAge());
+
+        return customerDetailsResponse;
+    }
+
+    @Override
+    public CustomerDetailsResponse fetchCustomerDetailsByIdAndName(int customerId, String customerName) {
+
+        //database is called using DAO interface and stored in entity class reference customer
+        Customer customer=customerDAO.findByIdAndName(customerId,customerName);
+
+        CustomerDetailsResponse customerDetailsResponse=new CustomerDetailsResponse();
+        customerDetailsResponse.setId(customer.getId());
+        customerDetailsResponse.setName(customer.getName());
+        customerDetailsResponse.setAge(customer.getAge());
+
+        return customerDetailsResponse;
+    }
 }

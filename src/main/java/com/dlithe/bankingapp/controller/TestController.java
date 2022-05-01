@@ -20,7 +20,6 @@ public class TestController {
 
     }
 
-
     @GetMapping("login/{username}/{password}")
     public String loginDetails(@PathVariable String username, @PathVariable String password) {
 //        return "Username is: "+username+" "+"Password is: "+password;
@@ -50,6 +49,20 @@ public class TestController {
     public CustomerDetailsResponse getDetailsWithAllFeedbacks(@PathVariable int customerId){
         return testService.getCustomerDetailsWithAllFeedback(customerId);
     }
+
+    //fetching data based on name
+    @GetMapping("fetch-customer-details/{customerName}")
+    public CustomerDetailsResponse getCustomerDetailsByName(@PathVariable String customerName){
+        return testService.fetchCustomerDetailsByName(customerName);
+    }
+
+    //fetching customer details based on id and name
+    @GetMapping("fetch-customer-details-by-id-name/{customerId}/{customerName}")
+    public CustomerDetailsResponse getCustomerDetailsByIdAndName(@PathVariable int customerId,@PathVariable String customerName){
+        return testService.fetchCustomerDetailsByIdAndName(customerId,customerName);
+    }
+
+
 }
 
 
